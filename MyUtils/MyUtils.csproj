@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\HttpHelper.cs" />
+    <Compile Include="DBData\IDbConfig.cs" />
+    <Compile Include="DBData\SqlData.cs" />
     <Compile Include="Entity\EntityCompare.cs" />
     <Compile Include="Entity\EntityConvertHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
