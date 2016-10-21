@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MetaDataV2">
+      <HintPath>..\SolutionDll\MetaDataV2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -47,6 +50,9 @@
     <Compile Include="Entity\EntityCompare.cs" />
     <Compile Include="Entity\EntityConvertHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="T4\DBEntityHelper.cs" />
+    <Compile Include="T4\DynamicBuilderEntity.cs" />
+    <Compile Include="T4\Extensions\ModelExt.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyUtils.Base\MyUtils.Base.csproj">
@@ -54,6 +60,7 @@
       <Name>MyUtils.Base</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

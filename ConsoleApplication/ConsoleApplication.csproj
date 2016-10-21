@@ -47,7 +47,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyUtils.Base\MyUtils.Base.csproj">
+      <Project>{E4C1772D-FB52-445E-80BE-5A9DAC33F252}</Project>
+      <Name>MyUtils.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyUtils\MyUtils.csproj">
+      <Project>{f8344f63-22a2-40c7-ab79-ed819828b5ce}</Project>
+      <Name>MyUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
