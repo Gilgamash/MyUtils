@@ -9,12 +9,16 @@ namespace MyUtils.Base.T4
     public class TableInfoEntity
     {
         public string TableName { get; set; }
+        public List<TableFieldInfo> FieldInfo { get; set; }
+    }
+
+    public class TableFieldInfo
+    {
         public string FieldName { get; set; }
-        public string Key { get; set; }
-        public string Type { get; set; }
-        public string Length { get; set; }
-        public string CanNull { get; set; }
+        public bool IsKey { get; set; }
+        public bool IsNull { get; set; }
         public string DefaultValue { get; set; }
         public string Remark { get; set; }
+        public string Type { get; set; }
     }
 }

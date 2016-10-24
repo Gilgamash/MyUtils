@@ -23,15 +23,28 @@ namespace MyUtils.T4
         public TableInfoEntity GetTableInfo(string tableName)
         {
             TableInfoEntity entity = new TableInfoEntity();
+            List<TableFieldInfo> fieldInfo = new List<TableFieldInfo>();
             MdFactory.SetConnectionStr(dbConnectStr);
             Database MyDb = MdFactory.SetCurrentDbName("TCInterVacationCommon", true);
             Dictionary<string, FieldObject> Decs = new Dictionary<string, FieldObject>();
             Dictionary<string, TableObject> TableDecs = new Dictionary<string, TableObject>();
             foreach (TableObject table in MyDb.GetTableView())
             {
-                if (!TableDecs.ContainsKey(table.name)) TableDecs.Add(table.name, table);
+                if (!table.name.Equals(tableName)) continue;
                 foreach (FieldObject field in table.Columns)
-                    if (!Decs.ContainsKey(field.ColumnName)) Decs.Add(field.ColumnName, field);
+                {
+                    fieldInfo.Add(new TableFieldInfo
+                    {
+                        FieldName = field.ColumnName,
+                        Remark = field.DeTextSimplified,
+                        IsKey = field.isPK,
+                        IsNull = field.isNull,
+                        DefaultValue = field.defaultVal,
+                        Type = field.DbTypeNameStr
+                    });
+                }
+                entity.TableName = tableName;
+                entity.FieldInfo = fieldInfo;
             }
             return entity;
         }
