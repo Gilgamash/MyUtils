@@ -48,5 +48,10 @@ namespace MyUtils.T4
             }
             return entity;
         }
+
+        public void SetModel(TableInfoEntity table)
+        {
+            StringBuilder builder = new StringBuilder();
+        }
     }
 }
