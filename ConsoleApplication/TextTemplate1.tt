@@ -1,0 +1,16 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(TargetDir)MyUtils.dll" #>
+<#@ assembly name="$(TargetDir)MyUtils.Base.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MyUtils.T4" #>
+<#@ import namespace="MyUtils.Base.T4" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ output extension=".cs" #>
+<#
+	//Debugger.Launch(); Debugger.Break();
+	TableInfoEntity table = DBEntityHelper.GetTableInfo(this.Host.TemplateFile, "TCInterVacationCommon", "ImageBasicInfo");
+	this.WriteLine(DBEntityHelper.SetModel(table));
+#>

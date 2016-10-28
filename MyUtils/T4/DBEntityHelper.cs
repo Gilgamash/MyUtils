@@ -5,23 +5,23 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MyUtils.T4
 {
-    public class DBEntityHelper
+    public static class DBEntityHelper
     {
-        private string dbConnectStr;
+        private static string dbConnectStr;
 
-        public DBEntityHelper()
+        public static TableInfoEntity GetTableInfo(string filePath, string dbName, string tableName)
         {
-            dbConnectStr = ConfigurationManager.ConnectionStrings["sqlserver"].ConnectionString;
-        }
-
-        public TableInfoEntity GetTableInfo(string tableName)
-        {
+            string pathStr = Path.GetDirectoryName(filePath);
+            string configPath = Directory.GetFiles(pathStr, "*.config").FirstOrDefault() ?? Directory.GetParent(pathStr).GetFiles("*.config").FirstOrDefault().FullName;
+            var config = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap { ExeConfigFilename = configPath }, ConfigurationUserLevel.None);
+            dbConnectStr = ((ConnectionStringsSection)config.GetSection("connectionStrings")).ConnectionStrings[dbName + "_connect"].ConnectionString;
             TableInfoEntity entity = new TableInfoEntity();
             List<TableFieldInfo> fieldInfo = new List<TableFieldInfo>();
             MdFactory.SetConnectionStr(dbConnectStr);
@@ -49,9 +49,20 @@ namespace MyUtils.T4
             return entity;
         }
 
-        public void SetModel(TableInfoEntity table)
+        public static string SetModel(TableInfoEntity table)
         {
             StringBuilder builder = new StringBuilder();
+            builder.AppendFormat("public class {0}",table.TableName);
+            NewLine(builder);
+            builder.Append("{");
+            NewLine(builder);
+            builder.Append("}");
+            return builder.ToString();
+        }
+
+        private static void NewLine(StringBuilder builder)
+        {
+            builder.AppendLine();
         }
     }
 }
