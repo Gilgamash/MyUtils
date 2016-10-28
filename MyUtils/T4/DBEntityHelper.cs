@@ -14,14 +14,12 @@ namespace MyUtils.T4
 {
     public static class DBEntityHelper
     {
-        private static string dbConnectStr;
-
         public static TableInfoEntity GetTableInfo(string filePath, string dbName, string tableName)
         {
             string pathStr = Path.GetDirectoryName(filePath);
             string configPath = Directory.GetFiles(pathStr, "*.config").FirstOrDefault() ?? Directory.GetParent(pathStr).GetFiles("*.config").FirstOrDefault().FullName;
             var config = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap { ExeConfigFilename = configPath }, ConfigurationUserLevel.None);
-            dbConnectStr = ((ConnectionStringsSection)config.GetSection("connectionStrings")).ConnectionStrings[dbName + "_connect"].ConnectionString;
+            string dbConnectStr = ((ConnectionStringsSection)config.GetSection("connectionStrings")).ConnectionStrings[dbName + "_connect"].ConnectionString;
             TableInfoEntity entity = new TableInfoEntity();
             List<TableFieldInfo> fieldInfo = new List<TableFieldInfo>();
             MdFactory.SetConnectionStr(dbConnectStr);
@@ -43,6 +41,7 @@ namespace MyUtils.T4
                         Type = field.DbTypeNameStr
                     });
                 }
+                entity.DatabaseName = dbName;
                 entity.TableName = tableName;
                 entity.FieldInfo = fieldInfo;
             }
@@ -52,17 +51,45 @@ namespace MyUtils.T4
         public static string SetModel(TableInfoEntity table)
         {
             StringBuilder builder = new StringBuilder();
-            builder.AppendFormat("public class {0}",table.TableName);
-            NewLine(builder);
-            builder.Append("{");
-            NewLine(builder);
-            builder.Append("}");
+            builder.AppendFormat("using System;").NewLine().NewLine();
+            builder.AppendFormat("public partial class {0}", table.TableName).NewLine();
+            builder.AppendFormat("{{").NewLine().Tab();
+            builder.AppendFormat("#region sql").NewLine().Tab();
+            builder.AppendFormat("#endregion").NewLine().Tab();
+            builder.AppendFormat("#region 表字段").NewLine();
+            table.FieldInfo.ForEach(t =>
+            {
+                builder.Tab();
+                builder.AppendFormat("///<summary>{0}</summary>", t.Remark).NewLine().Tab();
+                builder.AppendFormat("public {0} {1} {{ get; set; }}", ConvertParamsType(t.Type), t.FieldName).NewLine();
+            });
+            builder.Tab();
+            builder.AppendFormat("#endregion").NewLine();
+            builder.AppendFormat("}}");
             return builder.ToString();
         }
 
-        private static void NewLine(StringBuilder builder)
+        private static StringBuilder NewLine(this StringBuilder builder)
         {
-            builder.AppendLine();
+            return builder.AppendLine();
+        }
+
+        private static StringBuilder Tab(this StringBuilder builder)
+        {
+            return builder.Append("\t");
+        }
+
+        private static string ConvertParamsType(string type)
+        {
+            switch (type)
+            {
+                case "String": return "string";
+                case "Int16": return "short";
+                case "Int32": return "int";
+                case "Int64": return "long";
+                case "Byte": return "byte";
+                default: return type;
+            }
         }
     }
 }

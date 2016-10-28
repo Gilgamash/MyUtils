@@ -14,6 +14,7 @@ namespace ConsoleApplication
         static void Main(string[] args)
         {
             TableInfoEntity table = DBEntityHelper.GetTableInfo(@"H:\githubformine\MyUtils\ConsoleApplication\", "TCInterVacationCommon", "ImageBasicInfo");
+            DBEntityHelper.SetModel(table);
         }
     }
 }

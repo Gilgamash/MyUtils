@@ -8,6 +8,7 @@ namespace MyUtils.Base.T4
 {
     public class TableInfoEntity
     {
+        public string DatabaseName { get; set; }
         public string TableName { get; set; }
         public List<TableFieldInfo> FieldInfo { get; set; }
     }
