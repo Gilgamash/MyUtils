@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
-using MyUtils.Base.DBData;
 
 namespace MyUtils.DBData
 {

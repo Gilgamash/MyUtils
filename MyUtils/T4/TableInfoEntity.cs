@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyUtils.Base.T4
+namespace MyUtils.T4
 {
     public class TableInfoEntity
     {

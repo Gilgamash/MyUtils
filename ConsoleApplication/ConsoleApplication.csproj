@@ -57,10 +57,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyUtils.Base\MyUtils.Base.csproj">
-      <Project>{E4C1772D-FB52-445E-80BE-5A9DAC33F252}</Project>
-      <Name>MyUtils.Base</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MyUtils\MyUtils.csproj">
       <Project>{f8344f63-22a2-40c7-ab79-ed819828b5ce}</Project>
       <Name>MyUtils</Name>

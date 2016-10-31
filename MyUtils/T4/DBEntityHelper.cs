@@ -1,5 +1,5 @@
 ﻿using MetaDataV2;
-using MyUtils.Base.T4;
+using MyUtils.T4;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

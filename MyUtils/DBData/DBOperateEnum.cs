@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyUtils.Base.DBData
+namespace MyUtils.DBData
 {
     public enum DBOperateEnum
     {

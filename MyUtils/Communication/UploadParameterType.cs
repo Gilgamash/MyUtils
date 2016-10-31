@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyUtils.Base
+namespace MyUtils.Communication
 {
     /// <summary>
     /// 上传文件 - 请求参数类
