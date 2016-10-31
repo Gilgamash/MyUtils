@@ -3,6 +3,8 @@
 public partial class ImageBasicInfo
 {
 	#region sql
+	///<summary>查询SQL</summary>
+	public static string selectSql = "select IBIId,IBIImageName,IBIImageUrl,IBICopyright,IBIAuditStatus,IBIRowStatus,IBICreaterName,IBICreaterWorkNumber,IBICreateTime,IBIAuditName,IBIAuditWorkNumber,IBIAuditTime,IBIRemark,IBIImageSize,IBIImageHeight,IBIImageWidth,IBIImageType,IBICountry,IBICity,IBIExpiresDate,IBIPersonType,IBIRefuseReasion from TCInterVacationCommon.dbo.ImageBasicInfo with(nolock) where 1=1";
 	#endregion
 	#region 表字段
 	///<summary>主键，图片Id,自增长(1,1)</summary>

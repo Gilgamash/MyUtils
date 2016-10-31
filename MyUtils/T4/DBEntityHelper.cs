@@ -55,6 +55,8 @@ namespace MyUtils.T4
             builder.AppendFormat("public partial class {0}", table.TableName).NewLine();
             builder.AppendFormat("{{").NewLine().Tab();
             builder.AppendFormat("#region sql").NewLine().Tab();
+            builder.AppendFormat("///<summary>查询SQL</summary>").NewLine().Tab();
+            builder.AppendFormat("public static string selectSql = \"select {0} from {1}.dbo.{2} with(nolock) where 1=1\";", string.Join(",", table.FieldInfo.Select(t => t.FieldName)), table.DatabaseName, table.TableName).NewLine().Tab();
             builder.AppendFormat("#endregion").NewLine().Tab();
             builder.AppendFormat("#region 表字段").NewLine();
             table.FieldInfo.ForEach(t =>
