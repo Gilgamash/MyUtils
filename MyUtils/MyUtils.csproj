@@ -46,11 +46,13 @@
   <ItemGroup>
     <Compile Include="Communication\HttpHelper.cs" />
     <Compile Include="Communication\UploadParameterType.cs" />
+    <Compile Include="DBData\DbContext.cs" />
     <Compile Include="DBData\DBOperateEnum.cs" />
     <Compile Include="DBData\IDbConfig.cs" />
     <Compile Include="DBData\SqlData.cs" />
     <Compile Include="Entity\EntityCompare.cs" />
     <Compile Include="Entity\EntityConvertHelper.cs" />
+    <Compile Include="Expression2Sql\Expression2Sql.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="T4\DBEntityHelper.cs" />
     <Compile Include="T4\DynamicBuilderEntity.cs" />
